@@ -4,7 +4,7 @@ var voteText = document.querySelectorAll(".vote-text-js");
 
 
 var clicks = 0;
-var quickAdd = false;
+var quickAdd;
 
 function mouseUp() {
     quickAdd = setTimeout(doSetTimeout, 2500);
@@ -26,10 +26,9 @@ for (var i = 0; i < clickVote.length; i++) {
     var self = clickVote[i];
 
     self.addEventListener('click', function (event) {
-
         // prevent browser's default action
         event.preventDefault();
-        console.log("clicked")
+
         // call your awesome function here
         userVote(this); // 'this' refers to the current button on for loop
 
@@ -75,10 +74,8 @@ jQuery(clickVote).on("click", function (e) {
 
     e.preventDefault();
 
-    if (clicks == 50) {
-       return false;
-    }  
-
+    if (clicks < 50) {
+ 
     post_id = jQuery(this).attr("data-post_id")
     nonce = jQuery(this).attr("data-nonce")
 
@@ -104,5 +101,12 @@ jQuery(clickVote).on("click", function (e) {
             }
         }
     })
+
+   
+ }  else {
+    console.log("stop");
+    return false;
+ }
+
 
 })

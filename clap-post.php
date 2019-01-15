@@ -9,7 +9,6 @@
    License: GPL2
    */
 ?>
-
 <?php
 add_action("wp_ajax_user_vote", "user_vote");
 add_action("wp_ajax_nopriv_user_vote", "user_vote");
@@ -62,7 +61,7 @@ function my_script_enqueuer() {
 }
 
 function is_subpage() {
-    global $post;                              // load details about this page
+    global $post;        // load details about this page
     var_dump($post);
     if(get_post_type() == 'blog'):
         ?>
@@ -70,12 +69,9 @@ function is_subpage() {
             console.log("true");
         </script> 
         <?php
-     //   wp_register_script( "voter_script", WP_PLUGIN_URL.'/clap-post/voter_script.js', array('jquery') );
-    //    wp_localize_script( 'voter_script', 'myAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' )));        
-     
-     //   wp_enqueue_script( 'voter_script' );
+      //   wp_register_script( "voter_script", WP_PLUGIN_URL.'/clap-post/voter_script.js', array('jquery') );
+      //    wp_localize_script( 'voter_script', 'myAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' )));         
+      //   wp_enqueue_script( 'voter_script' );
     endif;
 }  
-
 ?>
-
