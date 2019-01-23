@@ -46,32 +46,4 @@ function user_vote() {
 
 }
 
-
-
-
-//add_action( 'get_footer', 'is_subpage' );
-    
-
-function my_script_enqueuer() {
-    wp_register_script( "voter_script", WP_PLUGIN_URL.'/clap-post/voter_script.js', array('jquery') );
-    wp_localize_script( 'voter_script', 'myAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' )));        
-    if(get_post_type() == 'blog') {
-    wp_enqueue_script( 'voter_script' );
-    }
-}
-
-function is_subpage() {
-    global $post;        // load details about this page
-    var_dump($post);
-    if(get_post_type() == 'blog'):
-        ?>
-        <script>
-            console.log("true");
-        </script> 
-        <?php
-      //   wp_register_script( "voter_script", WP_PLUGIN_URL.'/clap-post/voter_script.js', array('jquery') );
-      //    wp_localize_script( 'voter_script', 'myAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' )));         
-      //   wp_enqueue_script( 'voter_script' );
-    endif;
-}  
 ?>

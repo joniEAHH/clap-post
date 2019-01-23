@@ -1,6 +1,9 @@
-var clickVote = document.querySelectorAll('.user-vote-js');
-var voteCount = document.querySelectorAll(".vote-count-js");
-var voteText = document.querySelectorAll(".vote-text-js");
+
+var voteBlock = document.querySelectorAll('.vote--block');
+
+var buttonVote = document.querySelectorAll('.vote__button--click');
+var votes = document.querySelectorAll(".vote__number--count");
+var voteCountVotes = document.querySelectorAll(".vote__number--count-votes");
 
 
 var clicks = 0;
@@ -15,15 +18,15 @@ function mouseDown() {
 }
 
 function doSetTimeout(i) {
-    for (var i = 0; i < voteCount.length; i++) {
-        voteCount[i].classList.remove("is-active");
-        voteText[i].classList.remove("hidden");
+    for (var i = 0; i < voteCountVotes.length; i++) {
+        voteCountVotes[i].classList.remove("is-active");
+        votes[i].classList.remove("is-disabled");
     }
 }
 
-for (var i = 0; i < clickVote.length; i++) {
+for (var i = 0; i < buttonVote.length; i++) {
 
-    var self = clickVote[i];
+    var self = buttonVote[i];
 
     self.addEventListener('click', function (event) {
         // prevent browser's default action
@@ -41,36 +44,32 @@ for (var i = 0; i < clickVote.length; i++) {
 function userVote() {
 
     clicks++;
-    for (var i = 0; i < voteCount.length; i++) {
+    for (var i = 0; i < voteCountVotes.length; i++) {
         if (clicks <= 50) {
-            //console.log(voteCount[i]);
-            voteCount[i].innerHTML = "+" + clicks;
+            //console.log(voteCountVotes[i]);
+            voteCountVotes[i].innerHTML = "+" + clicks;
         }
 
         // removing the class
-        clickVote[i].classList.remove("click-vote--animation");
+        buttonVote[i].classList.remove("vote-button--animation");
         // re-adding the class
-        void clickVote[i].offsetWidth;
-        clickVote[i].classList.add("click-vote--animation");
-        clickVote[i].classList.add("is-active");
+        void buttonVote[i].offsetWidth;
+        buttonVote[i].classList.add("vote-button--animation");
+        buttonVote[i].classList.add("is-active");
 
         // hide vote text on click
-        voteText[i].classList.add("hidden");
+        votes[i].classList.add("is-disabled");
         // show vote counter after cick
-        voteCount[i].classList.add("is-active");
+        voteCountVotes[i].classList.add("is-active");
 
     }
-
-
-
-
 }
 
 
 
-var voteCounter = document.querySelectorAll(".vote-counter-js");
 
-jQuery(clickVote).on("click", function (e) {
+
+jQuery(buttonVote).on("click", function (e) {
 
     e.preventDefault();
 
@@ -91,11 +90,10 @@ jQuery(clickVote).on("click", function (e) {
         success: function (response) {
             if (response.type == "success") {
 
-                jQuery(voteCounter).each(function () {
-                    jQuery(this).html(response.vote_count);
+                jQuery(votes).each(function () {
+                    jQuery(this).html(response.vote_count + ' votos');
                 });
-
-                //  console.log(response);
+                
             } else {
                 console.log(response);
             }
